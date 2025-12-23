@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MegaHygiène - Nettoyage Professionnel à Lomé</title>
+    <!-- Lien vers la feuille de style (CSS) -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Lien pour les icônes Font Awesome (gratuit) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <!-- Police Google Fonts : propre et moderne -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <!-- ========== EN-TÊTE (HEADER) ========== -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <!-- Remplace # par le lien vers ta page d'accueil -->
+                <a href="#">
+                    <h1>🧼 MEGA<span>HYGIÈNE</span></h1>
+                    <p class="tagline">Cleanliness is my battle</p>
+                </a>
+            </div>
+       
+            <div class="menu-container">
+            <button class="menu-btn" onclick="toggleMenu()">⋮</button>
+        
+                <div class="menu" id="menu">
+            	<a href="#"><i class="fa-solid fa-house" style="color: #3498db; margin: 10px;"></i>Accueil</a>
+            	<a href="#services"><i class="fa-solid fa-bell-concierge" style="color: #3498db; margin: 10px;"></i>Services</a>
+            	<a href="tarifs.html"><i class="fa-solid fa-tag" style="color:  #3498db; margin: 10px;"></i>Tarifs</a>
+                <a href="galerie.html"><i class="fa-solid fa-address-card" style="color: #3498db; margin: 10px;"></i>Profil</a>
+                <a href="#contact"><i class="fa-solid fa-phone" style="color: #3498db; margin: 10px;"></i>Contact</a>
+                <a href="a-propos.html" ><i class="fa-solid fa-user" style="color: #3498db; margin: 10px;"></i>  À Propos</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ========== BANNIÈRE HERO ========== -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2>Votre partenaire de confiance pour l'entretien à <span>Lomé</span></h2>
+                <p>Nous redonnons son éclat à votre maison ou votre bureau. Des services complets, un matériel professionnel et une équipe fiable à votre service.</p>
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn btn-primary">Demander un devis gratuit</a>
+                    <a href="tel:+22891645244" class="btn btn-secondary">
+                        <i class="fas fa-phone"></i> Nous appeler
+                    </a>
+                    <a href="galerie.html" class="btn btn-primary">voir nos profil </a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <!-- Remplace l'image par la tienne (lien local ou URL) -->
+                <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Femme de ménage professionnelle souriante">
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== SECTION SERVICES ========== -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title">Nos <span>Services</span></h2>
+            <p class="section-subtitle">Découvrez notre gamme complète de services d'entretien pour particuliers et professionnels.</p>
+            <div class="services-grid">
+                <!-- Service 1 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3>Nettoyage Résidentiel</h3>
+                    <p>Un nettoyage complet et détaillé de votre maison ou appartement. Produits écologiques disponibles.</p>
+                    <a href="#" class="service-link">En savoir plus <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <!-- Service 2 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3>Nettoyage de Bureaux</h3>
+                    <p>Services adaptés aux entreprises pour un environnement de travail propre et sain.</p>
+                    <a href="#" class="service-link">En savoir plus <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <!-- Service 3 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-window-restore"></i>
+                    </div>
+                    <h3>Lavage de Vitres</h3>
+                    <p>Intérieur et extérieur. Nous rendons la transparence et la lumière à vos fenêtres.</p>
+                    <a href="#" class="service-link">En savoir plus <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <!-- Service 4 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-tree"></i>
+                    </div>
+                    <h3>Jardinage & Extérieur</h3>
+                    <p>Tonter, désherbage, taille et entretien de vos espaces verts.</p>
+                    <a href="#" class="service-link">En savoir plus <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <!-- Service 5 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3>Petits Travaux</h3>
+                    <p>Montage de meubles, fixations, petites réparations. Un coup de main pour tout faire.</p>
+                    <a href="#" class="service-link">En savoir plus <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== SECTION POURQUOI NOUS ========== -->
+    <section class="why-us">
+        <div class="container">
+            <h2 class="section-title">Pourquoi choisir <span>MegaHygiène</span> ?</h2>
+            <div class="reasons-grid">
+                <div class="reason">
+                    <i class="fas fa-leaf"></i>
+                    <h3>Produits Écologiques</h3>
+                    <p>Nous utilisons des détergents respectueux de l'environnement et de votre santé sur demande.</p>
+                </div>
+                <div class="reason">
+                    <i class="fas fa-user-shield"></i>
+                    <h3>Équipe Fiable</h3>
+                    <p>Nos agents sont formés, sérieux et soucieux du détail. Votre domicile est entre de bonnes mains.</p>
+                </div>
+                <div class="reason">
+                    <i class="fas fa-handshake"></i>
+                    <h3>Satisfaction Garantie</h3>
+                    <p>Si vous n'êtes pas satisfait, nous revenons gratuitement corriger le point concerné.</p>
+                </div>
+                <div class="reason">
+                    <i class="fas fa-shipping-fast"></i>
+                    <h3>Réactivité</h3>
+                    <p>Intervention rapide sur Lomé et ses environs. Devis gratuit et sans engagement.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== SECTION CONTACT ========== -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Contactez-<span>nous</span></h2>
+            <p class="section-subtitle">Demandez un devis gratuit ou posez-nous vos questions.</p>
+            <div class="contact-wrapper">
+                <div class="contact-info">
+                    <h3>Nos coordonnées</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> <strong>Zone d'intervention :</strong> Lomé et ses environs</p>
+                    <p><i class="fas fa-phone"></i> <strong>Téléphone :</strong> <a href="tel:+22891645244">+228 22 24 35 22</a></p>
+                    <p><i class="fas fa-envelope"></i> <strong>Email :</strong> godj02151@gmail.com</p>
+                    <p><i class="fas fa-clock"></i> <strong>Horaires :</strong> Lun - Sam : 7h - 19h</p>
+                </div>
+                <div class="contact-form">
+                    <h3>Formulaire de contact</h3>
+                    <form action="https://formsubmit.co/godj02151@gmail.com" method="POST" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <input type="text" name="name" placeholder="Votre nom complet" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" name="phone" placeholder="Votre numéro de téléphone" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" name="email" placeholder="Votre adresse email">
+                        </div>
+                        <div class="form-group">
+                            <select name="service" required>
+                                <option value="" disabled selected>Choisissez un service</option>
+                                <option value="menage">Nettoyage Résidentiel</option>
+                                <option value="bureaux">Nettoyage de Bureaux</option>
+                                <option value="vitres">Lavage de Vitres</option>
+                                <option value="jardin">Jardinage</option>
+                                <option value="travaux">Petits Travaux</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <textarea name="message" rows="4" placeholder="Décrivez votre besoin (lieu, surface, fréquence...)"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="file-upload">
+                                <i class="fas fa-paperclip"></i> Joindre une photo (optionnel)
+                            </label>
+                            <input type="file" id="file-upload" name="file" accept="image/*">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Envoyer la demande</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== PIED DE PAGE (FOOTER) ========== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3>🧼 MEGA<span>HYGIÈNE</span></h3>
+                    <p>Votre propreté, notre combat quotidien à Lomé.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Liens rapides</h4>
+                    <ul>
+                        <li><a href="#">Accueil</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="tarifs.html">Tarifs</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="a-propos.html">À-propos</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h4>Suivez-nous</h4>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="current-year">2024</span> MegaHygiène - Tous droits réservés. | Site basé à Lomé, Togo</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Petit script pour l'année en cours -->
+    <script>
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        
+        function toggleMenu() {
+    const menu = document.getElementById("menu");
+    menu.style.display = (menu.style.display === "block") ? "none" : "block";
+}
+    </script>
+</body>
+</html>
