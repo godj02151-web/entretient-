@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>À Propos - MegaHygiène Lomé</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Styles spécifiques à la page À Propos */
+        .about-page {
+            padding: 80px 0;
+            background-color: #fff;
+        }
+        
+        .about-hero {
+            background: linear-gradient(135deg, #f8fafc 0%, #e3f2fd 100%);
+            border-radius: 20px;
+            padding: 60px;
+            margin-bottom: 80px;
+            text-align: center;
+        }
+        
+        .about-hero h1 {
+            font-size: 3rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        
+        .about-hero p {
+            font-size: 1.3rem;
+            color: #555;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Section Mission */
+        .mission-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            margin-bottom: 80px;
+        }
+        
+        .mission-content h2 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 25px;
+        }
+        
+        .mission-content h2 span {
+            color: #3498db;
+        }
+        
+        .mission-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 30px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #3498db;
+            margin-bottom: 10px;
+        }
+        
+        .mission-image img {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        /* Section Valeurs */
+        .values-section {
+            background: #f8fafc;
+            border-radius: 20px;
+            padding: 60px;
+            margin-bottom: 80px;
+        }
+        
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+        
+        .value-card {
+            text-align: center;
+            padding: 40px 30px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .value-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .value-icon {
+            width: 80px;
+            height: 80px;
+            background: #e3f2fd;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-size: 2.5rem;
+            color: #3498db;
+        }
+        
+        /* Section Équipe */
+        .team-section {
+            margin-bottom: 80px;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+        
+        .team-member {
+            text-align: center;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        
+        .member-photo {
+            height: 300px;
+            overflow: hidden;
+        }
+        
+        .member-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .team-member:hover .member-photo img {
+            transform: scale(1.05);
+        }
+        
+        .member-info {
+            padding: 30px;
+        }
+        
+        .member-name {
+            font-size: 1.4rem;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        
+        .member-role {
+            color: #3498db;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        /* Section Garanties */
+        .guarantees-section {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            border-radius: 20px;
+            padding: 60px;
+            color: white;
+            text-align: center;
+        }
+        
+        .guarantees-section h2 {
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+        }
+        
+        .guarantees-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+        
+        .guarantee-item {
+            padding: 30px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .guarantee-item i {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #a5d8ff;
+        }
+        
+        @media (max-width: 992px) {
+            .mission-section {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .about-hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .about-hero,
+            .values-section,
+            .guarantees-section {
+                padding: 40px 20px;
+            }
+            
+            .mission-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <h1>🧼 MEGA<span>HYGIÈNE</span></h1>
+                    <p class="tagline">Cleanliness is my battle</p>
+                </a>
+            </div>
+            <nav class="navbar">
+               <div class="menu-container">
+            <button class="menu-btn" onclick="toggleMenu()">⋮</button>
+        
+                <div class="menu" id="menu">
+            	<a href="index.html"><i class="fa-solid fa-house" style="color: #3498db; margin: 10px;"></i>Accueil</a>
+            	<a href="index.html#services"><i class="fa-solid fa-bell-concierge" style="color: #3498db; margin: 10px;"></i>Services</a>
+            	<a href="tarifs.html"><i class="fa-solid fa-tag" style="color:  #3498db; margin: 10px;"></i>Tarifs</a>
+                <a href="galerie.html"><i class="fa-solid fa-address-card" style="color: #3498db; margin: 10px;"></i>Profil</a>
+                <a href="index.html#contact"><i class="fa-solid fa-phone" style="color: #3498db; margin: 10px;"></i>Contact</a>
+                <a href="a-propos.html" ><i class="fa-solid fa-user" style="color: #3498db; margin: 10px;"></i>  À Propos</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page À Propos -->
+    <section class="about-page">
+        <div class="container">
+            <!-- Hero Section -->
+            <div class="about-hero">
+                <h1>Notre Histoire, <span>Votre Confiance</span></h1>
+                <p>Depuis notre création à Lomé, MegaHygiène s'engage à redonner leur éclat à vos espaces de vie et de travail. La propreté n'est pas qu'un service, c'est notre passion.</p>
+            </div>
+            
+            <!-- Mission & Histoire -->
+            <div class="mission-section">
+                <div class="mission-content">
+                    <h2>Notre <span>Mission</span></h2>
+                    <p style="font-size: 1.2rem; line-height: 1.8; margin-bottom: 25px;">
+                        Chez MegaHygiène, nous croyons que chaque maison et chaque bureau mérite d'être un espace sain, accueillant et propre. Notre mission est d'apporter des solutions d'entretien professionnelles, fiables et accessibles aux habitants et entreprises de Lomé.
+                    </p>
+                    <p style="margin-bottom: 25px;">
+                        Fondée par des professionnels du secteur, notre entreprise combine expertise technique, rigueur dans l'exécution et respect absolu de vos biens. Nous utilisons des équipements modernes et des produits de qualité, avec une option écologique pour préserver votre santé et l'environnement.
+                    </p>
+                    
+                    <div class="mission-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">250+</div>
+                            <div class="stat-label">Clients satisfaits</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">98%</div>
+                            <div class="stat-label">Taux de satisfaction</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">24h</div>
+                            <div class="stat-label">Réponse garantie</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">100%</div>
+                            <div class="stat-label">Satisfaction garantie</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mission-image">
+                    <img src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Équipe MegaHygiène">
+                </div>
+            </div>
+            
+            <!-- Nos Valeurs -->
+            <div class="values-section">
+                <h2 class="section-title">Nos <span>Valeurs</span></h2>
+                <p class="section-subtitle">Les principes qui guident chacune de nos interventions</p>
+                
+                <div class="values-grid">
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Fiabilité</h3>
+                        <p>Nous honorons chaque engagement, chaque rendez-vous. Votre confiance est notre priorité absolue.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <h3>Écologie</h3>
+                        <p>Nous privilégions les produits respectueux de l'environnement et formons notre équipe aux bonnes pratiques.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-award"></i>
+                        </div>
+                        <h3>Excellence</h3>
+                        <p>Chaque détail compte. Nous visons la perfection dans l'exécution de chaque service.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h3>Respect</h3>
+                        <p>Respect de vos biens, de votre intimité et de votre budget. Une relation transparente et honnête.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Notre Équipe -->
+            <div class="team-section">
+                <h2 class="section-title">Notre <span>Équipe</span></h2>
+                <p class="section-subtitle">Des professionnels formés, passionnés par leur métier</p>
+                
+                <div class="team-grid">
+                    <div class="team-member">
+                        <div class="member-photo">
+                            <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Directeur MegaHygiène">
+                        </div>
+                        <div class="member-info">
+                            <h4 class="member-name">Koffi Mensah</h4>
+                            <div class="member-role">Fondateur & Directeur</div>
+                            <p>Plus de 10 ans d'expérience dans les services d'entretien. Passionné par l'organisation et la propreté.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="team-member">
+                        <div class="member-photo">
+                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Superviseure qualité">
+                        </div>
+                        <div class="member-info">
+                            <h4 class="member-name">Ama Djidjélé</h4>
+                            <div class="member-role">Superviseure Qualité</div>
+                            <p>Responsable de la formation des équipes et du contrôle qualité. Perfectionniste dans l'âme.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="team-member">
+                        <div class="member-photo">
+                            <img src="https://images.unsplash.com/photo-1560250056-07ba64664864?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Responsable jardinage">
+                        </div>
+                        <div class="member-info">
+                            <h4 class="member-name">Komlan Agbéko</h4>
+                            <div class="member-role">Responsable Jardinage</div>
+                            <p>Expert en entretien d'espaces verts. Connaît chaque plante et chaque technique d'entretien.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Nos Garanties -->
+            <div class="guarantees-section">
+                <h2>Nos <span>Garanties</span></h2>
+                
+                <div class="guarantees-grid">
+                    <div class="guarantee-item">
+                        <i class="fas fa-check-circle"></i>
+                        <h3>Satisfaction 100%</h3>
+                        <p>Si vous n'êtes pas satisfait, nous revenons gratuitement corriger le problème.</p>
+                    </div>
+                    
+                    <div class="guarantee-item">
+                        <i class="fas fa-user-shield"></i>
+                        <h3>Équipe Assurée</h3>
+                        <p>Tous nos agents sont couverts par une assurance responsabilité civile.</p>
+                    </div>
+                    
+                    <div class="guarantee-item">
+                        <i class="fas fa-clock"></i>
+                        <h3>Ponctualité</h3>
+                        <p>Nous arrivons à l'heure convenue. Tout retard est exceptionnel et communiqué.</p>
+                    </div>
+                    
+                    <div class="guarantee-item">
+                        <i class="fas fa-lock"></i>
+                        <h3>Confidentialité</h3>
+                        <p>Votre vie privée est respectée. Nos agents sont formés à la discrétion.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3>🧼 MEGA<span>HYGIÈNE</span></h3>
+                    <p>Votre propreté, notre combat quotidien à Lomé.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Liens rapides</h4>
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="index.html#services">Services</a></li>
+                        <li><a href="a-propos.html">À Propos</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h4>Suivez-nous</h4>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="current-year">2024</span> MegaHygiène - Tous droits réservés. | Site basé à Lomé, Togo</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Année en cours
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        
+        function toggleMenu() {
+    const menu = document.getElementById("menu");
+    menu.style.display = (menu.style.display === "block") ? "none" : "block";
+}
+    </script>
+</body>
+</html>

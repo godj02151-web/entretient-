@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarifs - MegaHygiène Lomé</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Styles spécifiques aux tarifs */
+        .pricing-page {
+            padding: 80px 0;
+            background-color: #f8fafc;
+        }
+        
+        .pricing-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 50px;
+            color: #555;
+            font-size: 1.1rem;
+        }
+        
+        .pricing-tables {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .pricing-card {
+            background: white;
+            border-radius: 15px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border: 2px solid #eef5ff;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+            position: relative;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            border-color: #3498db;
+        }
+        
+        .pricing-card.popular {
+            border-color: #3498db;
+            background: linear-gradient(135deg, #f8fafc 0%, #e3f2fd 100%);
+        }
+        
+        .popular-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #2ecc71;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .pricing-icon {
+            font-size: 3rem;
+            color: #3498db;
+            margin-bottom: 20px;
+        }
+        
+        .pricing-card h3 {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .price {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .price span {
+            font-size: 1rem;
+            color: #7f8c8d;
+        }
+        
+        .pricing-features {
+            list-style: none;
+            padding: 0;
+            margin: 30px 0;
+            text-align: left;
+        }
+        
+        .pricing-features li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+        
+        .pricing-features i.fa-check {
+            color: #2ecc71;
+        }
+        
+        .pricing-features i.fa-times {
+            color: #e74c3c;
+        }
+        
+        /* Tableau de prix détaillé */
+        .price-table {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            margin-bottom: 60px;
+        }
+        
+        .price-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .price-table th {
+            background: #3498db;
+            color: white;
+            padding: 20px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        .price-table td {
+            padding: 18px 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .price-table tr:hover {
+            background-color: #f9f9f9;
+        }
+        
+        .price-table .service-name {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .price-table .price-cell {
+            color: #3498db;
+            font-weight: 600;
+        }
+        
+        /* Section questions fréquentes */
+        .faq-section {
+            background: white;
+            border-radius: 15px;
+            padding: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        
+        .faq-item {
+            margin-bottom: 25px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 25px;
+        }
+        
+        .faq-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 1.1rem;
+        }
+        
+        .faq-question i {
+            transition: transform 0.3s ease;
+            color: #3498db;
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            color: #555;
+            line-height: 1.7;
+            margin-top: 15px;
+        }
+        
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+        }
+        
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+        
+        .cta-pricing {
+            text-align: center;
+            margin-top: 60px;
+            padding: 40px;
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            border-radius: 15px;
+            color: white;
+        }
+        
+        .cta-pricing h3 {
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        
+        .cta-pricing .btn {
+            background: white;
+            color: #3498db;
+            font-size: 1.1rem;
+            padding: 15px 40px;
+        }
+        
+        @media (max-width: 768px) {
+            .pricing-tables {
+                grid-template-columns: 1fr;
+            }
+            
+            .price-table table {
+                display: block;
+                overflow-x: auto;
+            }
+            
+            .faq-section {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <h1>🧼 MEGA<span>HYGIÈNE</span></h1>
+                    <p class="tagline">Cleanliness is my battle</p>
+                </a>
+            </div>
+            <div class="menu-container">
+    <button class="menu-btn" onclick="toggleMenu()">⋮</button>
+
+    <div class="menu" id="menu">
+    	<a href="index.html"><i class="fa-solid fa-house" style="color: #3498db; margin: 10px;"></i>Accueil</a>
+    	<a href="index.html#services"><i class="fa-solid fa-bell-concierge" style="color: #3498db; margin: 10px;"></i>Services</a>
+    	<a href="tarifs.html"><i class="fa-solid fa-tag" style="color:  #3498db; margin: 10px;"></i>Tarifs</a>
+        <a href="galeri.html"><i class="fa-solid fa-address-card" style="color: #3498db; margin: 10px;"></i>Profil</a>
+        <a href="index.html#contact"><i class="fa-solid fa-phone" style="color: #3498db; margin: 10px;"></i>Contact</a>  
+        <a href="a-propos.html" ><i class="fa-solid fa-user" style="color: #3498db; margin: 10px;"></i>  À Propos</a>
+    </div>
+</div>
+        </div>
+    </header>
+
+    <!-- Page Tarifs -->
+    <section class="pricing-page">
+        <div class="container">
+            <h2 class="section-title">Nos <span>Tarifs</span> Transparents</h2>
+            <p class="pricing-intro">
+                Chez MegaHygiène, nous croyons en la transparence. Tous nos tarifs sont indiqués clairement ci-dessous.
+                <strong>Devis gratuit et sans engagement</strong> pour un service personnalisé selon vos besoins exacts.
+            </p>
+            
+            <!-- Forfaits populaires -->
+            <div class="pricing-tables">
+                <!-- Forfait 1 -->
+                <div class="pricing-card">
+                    <div class="pricing-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3>Basique</h3>
+                    <div class="price">15 000 <span>FCFA / session</span></div>
+                    <p>Parfait pour un studio ou un petit appartement</p>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Nettoyage des surfaces</li>
+                        <li><i class="fas fa-check"></i> Lavage des sols</li>
+                        <li><i class="fas fa-check"></i> Salle de bain + cuisine</li>
+                        <li><i class="fas fa-times"></i> Lavage de vitres</li>
+                        <li><i class="fas fa-times"></i> Produits écologiques</li>
+                    </ul>
+                    <a href="index.html#contact" class="btn btn-primary">Choisir ce forfait</a>
+                </div>
+                
+                <!-- Forfait 2 (Populaire) -->
+                <div class="pricing-card popular">
+                    <div class="popular-badge">Le plus choisi</div>
+                    <div class="pricing-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3>Complet</h3>
+                    <div class="price">25 000 <span>FCFA / session</span></div>
+                    <p>Maison moyenne (3-4 pièces) - Meilleur rapport qualité/prix</p>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Tout le forfait Basique</li>
+                        <li><i class="fas fa-check"></i> Lavage de vitres intérieures</li>
+                        <li><i class="fas fa-check"></i> Dépoussiérage complet</li>
+                        <li><i class="fas fa-check"></i> Produits écologiques option</li>
+                        <li><i class="fas fa-times"></i> Nettoyage extérieur</li>
+                    </ul>
+                    <a href="index.html#contact" class="btn btn-primary">Choisir ce forfait</a>
+                </div>
+                
+                <!-- Forfait 3 -->
+                <div class="pricing-card">
+                    <div class="pricing-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h3>Premium</h3>
+                    <div class="price">40 000 <span>FCFA / session</span></div>
+                    <p>Grande maison ou nettoyage post-travaux</p>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Tout le forfait Complet</li>
+                        <li><i class="fas fa-check"></i> Nettoyage extérieur (terrasse)</li>
+                        <li><i class="fas fa-check"></i> Produits écologiques inclus</li>
+                        <li><i class="fas fa-check"></i> Désinfection approfondie</li>
+                        <li><i class="fas fa-check"></i> Priorité sur les rendez-vous</li>
+                    </ul>
+                    <a href="index.html#contact" class="btn btn-primary">Choisir ce forfait</a>
+                </div>
+            </div>
+            
+            <!-- Tableau détaillé -->
+            <h3 class="section-title" style="font-size: 2rem; margin-bottom: 30px;">Tarifs à la <span>carte</span></h3>
+            <div class="price-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Service</th>
+                            <th>Description</th>
+                            <th>Tarif à partir de</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="service-name">Nettoyage Résidentiel</td>
+                            <td>Par heure, selon la surface et l'état</td>
+                            <td class="price-cell">5 000 FCFA / h</td>
+                        </tr>
+                        <tr>
+                            <td class="service-name">Nettoyage de Bureaux</td>
+                            <td>Sur devis selon la surface et la fréquence</td>
+                            <td class="price-cell">8 000 FCFA / h</td>
+                        </tr>
+                        <tr>
+                            <td class="service-name">Lavage de Vitres</td>
+                            <td>Intérieur et extérieur, selon le nombre</td>
+                            <td class="price-cell">3 000 FCFA / heure</td>
+                        </tr>
+                        <tr>
+                            <td class="service-name">Jardinage</td>
+                            <td>Tonte, désherbage, taille - par session</td>
+                            <td class="price-cell">10 000 FCFA / session</td>
+                        </tr>
+                        <tr>
+                            <td class="service-name">Petits Travaux</td>
+                            <td>Montage meuble, fixation, petites réparations</td>
+                            <td class="price-cell">7 000 FCFA / heure</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Questions fréquentes -->
+            <div class="faq-section">
+                <h3 class="section-title" style="font-size: 2rem; margin-bottom: 40px;">Questions <span>Fréquentes</span></h3>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Comment est calculé le prix final ?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Le prix dépend de plusieurs facteurs : la surface à nettoyer, l'état initial, les services spécifiques demandés (lavage de vitres, etc.), et la fréquence. Nous établissons un devis gratuit après une visite ou évaluation par photos.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Proposez-vous des forfaits mensuels ?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Oui ! Pour nos clients réguliers, nous proposons des forfaits mensuels avec une réduction de 10% à 20% selon la fréquence. Contactez-nous pour un devis personnalisé.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Quels moyens de paiement acceptez-vous ?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Nous acceptons le paiement en espèces (FCFA) et par mobile money (Moov Money, Flooz) après la prestation. Aucun acompte n'est demandé avant le service.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Travaillez-vous le week-end ?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Oui, nous intervenons également le samedi avec un léger supplément de 15%. Le dimanche est réservé aux urgences avec un supplément de 30%.
+                    </div>
+                </div>
+            </div>
+            
+            <!-- CTA final -->
+            <div class="cta-pricing">
+                <h3>Prêt à retrouver un environnement impeccable ?</h3>
+                <p>Contactez-nous pour un devis gratuit et sans engagement.</p>
+                <a href="contact.html" class="btn">Demander un devis gratuit</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3>🧼 MEGA<span>HYGIÈNE</span></h3>
+                    <p>Votre propreté, notre combat quotidien à Lomé.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Liens rapides</h4>
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="index.html#services">Services</a></li>
+                        <li><a href="tarifs.html">Tarifs</a></li>
+                        <li><a href="galerie.html">Galerie</a></li>
+                    
+                    <li><a href="a-propos.html">A-propos</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h4>Suivez-nous</h4>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="current-year">2024</span> MegaHygiène - Tous droits réservés. | Site basé à Lomé, Togo</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ interactif
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', function() {
+                const faqItem = this.parentElement;
+                faqItem.classList.toggle('active');
+            });
+        });
+        
+        // Année en cours
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        function toggleMenu() {
+    const menu = document.getElementById("menu");
+    menu.style.display = (menu.style.display === "block") ? "none" : "block";
+}
+    </script>
+</body>
+</html> 

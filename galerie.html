@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galerie - MegaHygiène Lomé</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Styles spécifiques à la galerie */
+        .gallery-page {
+            padding: 80px 0;
+            background-color: #fff;
+        }
+        
+        .gallery-filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+        
+        .filter-btn {
+            padding: 10px 25px;
+            background: #f1f8ff;
+            border: 2px solid #d1e7ff;
+            border-radius: 30px;
+            color: #3498db;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        
+        .gallery-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            height: 250px;
+            cursor: pointer;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+            padding: 20px;
+            transform: translateY(10px);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .gallery-overlay h4 {
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+        
+        .gallery-overlay p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin: 0;
+        }
+        
+        /* Modal pour agrandir les images */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 5px;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .close-modal:hover {
+            color: #3498db;
+        }
+        
+        .modal-caption {
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 1.1rem;
+        }
+        
+        /* Section avant/après */
+        .comparison-section {
+            margin-top: 80px;
+            padding: 40px 0;
+            background-color: #f8fafc;
+            border-radius: 15px;
+        }
+        
+        .comparison-title {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #2c3e50;
+        }
+        
+        .comparison-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .comparison-item {
+            text-align: center;
+        }
+        
+        .comparison-images {
+            position: relative;
+            height: 250px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        
+        .comparison-images .before,
+        .comparison-images .after {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        
+        .comparison-label {
+            background: #3498db;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header (identique à l'accueil) -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <h1>🧼 MEGA<span>HYGIÈNE</span></h1>
+                    <p class="tagline">Cleanliness is my battle</p>
+                </a>
+            </div>
+            <nav class="navbar">
+                 <div class="menu-container">
+            <button class="menu-btn" onclick="toggleMenu()">⋮</button>
+        
+                <div class="menu" id="menu">
+            	<a href="index.html"><i class="fa-solid fa-house" style="color: #3498db; margin: 10px;"></i>Accueil</a>
+            	<a href="index.html#services"><i class="fa-solid fa-bell-concierge" style="color: #3498db; margin: 10px;"></i>Services</a>
+            	<a href="tarifs.html"><i class="fa-solid fa-tag" style="color:  #3498db; margin: 10px;"></i>Tarifs</a>
+                <a href="galerie.html"><i class="fa-solid fa-address-card" style="color: #3498db; margin: 10px;"></i>Profil</a>
+                <a href="index.html#contact"><i class="fa-solid fa-phone" style="color: #3498db; margin: 10px;"></i>Contact</a>
+                  <a href="a-propos.html" ><i class="fa-solid fa-user" style="color: #3498db; margin: 10px;"></i>  À Propos</a>
+                </div>
+            </div>
+             
+        </div>
+    </header>
+
+    <!-- Section Galerie Principale -->
+    <section class="gallery-page">
+        <div class="container">
+            <h2 class="section-title">Notre <span>Galerie</span></h2>
+            <p class="section-subtitle">Découvrez nos réalisations à Lomé. Des transformations qui parlent d'elles-mêmes.</p>
+            
+            <!-- Filtres -->
+            <div class="gallery-filters">
+                <button class="filter-btn active" data-filter="all">Tous</button>
+                <button class="filter-btn" data-filter="avant-apres">Avant/Après</button>
+                <button class="filter-btn" data-filter="menage">Nettoyage</button>
+                <button class="filter-btn" data-filter="vitres">Vitres</button>
+                <button class="filter-btn" data-filter="jardin">Jardinage</button>
+                <button class="filter-btn" data-filter="equipe">Notre Équipe</button>
+            </div>
+            
+            <!-- Grille de photos -->
+            <div class="gallery-grid">
+                <!-- Photo 1 -->
+                <div class="gallery-item" data-category="avant-apres">
+                    <img src="https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Salon avant nettoyage">
+                    <div class="gallery-overlay">
+                        <h4>Salon résidentiel</h4>
+                        <p>Transformation complète</p>
+                    </div>
+                </div>
+                
+                <!-- Photo 2 -->
+                <div class="gallery-item" data-category="menage">
+                    <img src="https://us.123rf.com/450wm/dolgachov/dolgachov1905/dolgachov190502043/123075302-african-woman-with-sponge-cleaning-floor-at-home.jpg?ver=6" alt="Nettoyage cuisine">
+                    <div class="gallery-overlay">
+                        <h4>Cuisine professionnelle</h4>
+                        <p>Désinfection complète</p>
+                    </div>
+                </div>
+                
+                 <div class="gallery-item" data-category="menage">
+                    <img src="https://us.123rf.com/450wm/olegopryshko/olegopryshko2310/olegopryshko231000367/216605093-hand-of-woman-cleaning-the-kitchen-counter-and-sink-at-home-woman-washing-sink-in-kitchen.jpg?ver=6" alt="Nettoyage cuisine">
+                    <div class="gallery-overlay">
+                        <h4>Cuisine professionnelle</h4>
+                        <p>Désinfection complète</p>
+                    </div>
+                </div>
+
+                <!-- Photo 3 -->
+                <div class="gallery-item" data-category="vitres">
+                    <img src="https://us.123rf.com/450wm/kaewyoo/kaewyoo2005/kaewyoo200500019/147810493-hands-wearing-blue-gloves-holding-a-white-plastic-spray-bottle-and-towel-fabric-cleaning-home-glass.jpg?ver=6" alt="Lavage de vitres">
+                    <div class="gallery-overlay">
+                        <h4>Lavage de vitres</h4>
+                        <p>Immeuble à Lomé</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="vitres">
+                    <img src="https://us.123rf.com/450wm/snide12/snide122511/snide12251100700/259172177-a-gloved-hand-uses-a-squeegee-to-clean-a-large-window-with-a-modern-office-building-visible-outside.jpg?ver=6" alt="Lavage de vitres">
+                    <div class="gallery-overlay">
+                        <h4>Lavage de vitres</h4>
+                        <p>Immeuble à Lomé</p>
+                    </div>
+                </div>
+                
+                <!-- Photo 4 -->
+                <div class="gallery-item" data-category="jardin">
+                    <img src="https://us.123rf.com/450wm/wavebreakmediamicro/wavebreakmediamicro2107/wavebreakmediamicro210700558/171287303-portrait-of-senior-african-american-couple-spending-time-in-sunny-garden-together-planting-flowers.jpg?ver=6" alt="Jardinage">
+                    <div class="gallery-overlay">
+                        <h4>Entretien de jardin</h4>
+                        <p>Tonte et désherbage</p>
+                    </div>
+                </div>
+
+                 <!-- Photo 5 -->
+                <div class="gallery-item" data-category="jardin">
+                    <img src="https://us.123rf.com/450wm/farhadib/farhadib2511/farhadib251112143/260523873-workers-are-tending-to-a-lush-garden-using-tools-like-a-tiller-and-wheelbarrow-while-planting.jpg?ver=6" alt="Jardinage">
+                    <div class="gallery-overlay">
+                        <h4>Entretien de jardin</h4>
+                        <p>Tonte et désherbage</p>
+                    </div>
+                </div>
+                
+                <!-- Photo 6 -->
+                <div class="gallery-item" data-category="equipe">
+                    <img src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Notre équipe">
+                    <div class="gallery-overlay">
+                        <h4>Notre équipe</h4>
+                        <p>Professionnels formés</p>
+                    </div>
+                </div>
+                
+                <!-- Photo 6 -->
+                <div class="gallery-item" data-category="avant-apres">
+                    <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Bureau après nettoyage">
+                    <div class="gallery-overlay">
+                        <h4>Bureau d'entreprise</h4>
+                        <p>Nettoyage post-travaux</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Avant/Après spéciale -->
+    <section class="comparison-section">
+        <div class="container">
+            <h3 class="comparison-title">Transformations <span>Avant / Après</span></h3>
+            <div class="comparison-container">
+                <div class="comparison-item">
+                    <div class="comparison-images">
+                        <img class="before" src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Avant">
+                        <img class="after" src="https://images.unsplash.com/photo-1560184897-67f4a3f9a7fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Après">
+                    </div>
+                    <h4>Salle de bain résidentielle</h4>
+                    <span class="comparison-label">+ 95% de propreté</span>
+                </div>
+                
+                <div class="comparison-item">
+                    <div class="comparison-images">
+                        <img class="before" src="https://images.unsplash.com/photo-1595425837375-4273454d1f6c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Avant">
+                        <img class="after" src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Après">
+                    </div>
+                    <h4>Terrasse et espace extérieur</h4>
+                    <span class="comparison-label">+ 90% d'amélioration</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal pour agrandir les images -->
+    <div id="imageModal" class="modal">
+        <span class="close-modal">&times;</span>
+        <img class="modal-content" id="modalImage">
+        <div id="modalCaption" class="modal-caption"></div>
+    </div>
+
+    <!-- Footer (identique à l'accueil) -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3>🧼 MEGA<span>HYGIÈNE</span></h3>
+                    <p>Votre propreté, notre combat quotidien à Lomé.</p>
+                    
+                </div>
+                <div class="footer-links">
+                    <h4>Liens rapides</h4>
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="index.html#services">Services</a></li>
+                        <li><a href="tarifs.html">Tarifs</a></li>
+                        <li><a href="galerie.html">Galerie</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h4>Suivez-nous</h4>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="current-year">2024</span> MegaHygiène - Tous droits réservés. | Site basé à Lomé, Togo</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Filtrage des photos
+        document.querySelectorAll('.filter-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                // Active le bouton
+                document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                
+                const filter = this.getAttribute('data-filter');
+                const items = document.querySelectorAll('.gallery-item');
+                
+                items.forEach(item => {
+                    if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+        
+        // Modal pour agrandir les images
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+        const captionText = document.getElementById('modalCaption');
+        const closeModal = document.querySelector('.close-modal');
+        
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const img = this.querySelector('img');
+                modal.style.display = 'flex';
+                modalImg.src = img.src;
+                captionText.innerHTML = this.querySelector('.gallery-overlay').innerHTML;
+            });
+        });
+        
+        closeModal.addEventListener('click', function() {
+            modal.style.display = 'none';
+        });
+        
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+        
+        // Année en cours
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        
+        function toggleMenu() {
+    const menu = document.getElementById("menu");
+    menu.style.display = (menu.style.display === "block") ? "none" : "block";
+}
+    </script>
+</body>
+</html>
